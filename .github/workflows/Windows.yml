@@ -36,7 +36,11 @@ jobs:
           cached: ${{ steps.cache-qt.outputs.cache-hit }} # optional, default is false
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # Whether to checkout submodules
+          submodules: recursive
 
       - name: CMake Configure
         run: cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${{ env.QT6_DIR }} -S . -B ./build/release
