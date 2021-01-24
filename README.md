@@ -1,3 +1,7 @@
+![CI-Windows](https://github.com/ZgblKylin/DD_Monitor_cpp/workflows/CI-Windows/badge.svg?branch=master)
+
+
+
 # DD监控室(C++版本)
 
 Fork 自 [DD监控室](https://github.com/zhimingshenjun/DD_Monitor)，详见 [B站视频](https://www.bilibili.com/video/BV1yo4y1d7iP)
