@@ -1,0 +1,45 @@
+name: CI-Windows
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Cache Qt
+        uses: actions/cache@v1
+        with:
+          path: ../Qt
+          key: ${{ runner.os }}-Qt6-Cache
+
+      - name: Install Qt
+        # You may pin to the exact commit or the version.
+        # uses: jurplel/install-qt-action@082f6da1c27244004fa3c4b800f8ff21f066d905
+        uses: jurplel/install-qt-action@v2.12.1
+        with:
+          # Version of Qt to install
+          version: 6.0.0 # optional, default is 5.15.2
+          # Whether or not to actually download Qt
+          cached: ${{ steps.cache-qt.outputs.cache-hit }} # optional, default is false
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: CMake Configure
+        run: cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${{ env.QT6_DIR }} -S . -B ./build/release
+
+      - name: Build
+        run: cmake --build ./build/release -j
