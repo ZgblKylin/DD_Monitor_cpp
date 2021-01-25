@@ -1,0 +1,11 @@
+set(CMAKE_PREFIX_PATH
+  ${CMAKE_PREFIX_PATH}
+  ${CMAKE_CURRENT_LIST_DIR}/${CMAKE_SYSTEM_NAME}
+)
+
+find_package(VLCQt
+  COMPONENTS
+    Core
+    Widgets
+  REQUIRED
+)

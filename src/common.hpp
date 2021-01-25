@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef DDMONITOR_COMMON_HPP
 #define DDMONITOR_COMMON_HPP
 
@@ -12,6 +12,13 @@
 
 // KtUtils
 #include <KtUtils/KtUtils>
+
+// vlc-qt
+#include <VLCQtCore/Audio.h>
+#include <VLCQtCore/Common.h>
+#include <VLCQtCore/Instance.h>
+#include <VLCQtCore/Media.h>
+#include <VLCQtCore/MediaPlayer.h>
 
 QSettings Settings();
 

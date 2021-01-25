@@ -1,4 +1,4 @@
-# ================================================================
+﻿# ================================================================
 # Setup Project
 # ================================================================
 cmake_minimum_required(VERSION 3.16.0)
@@ -17,7 +17,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/lib)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
-find_package(Qt6
+find_package(Qt5
   COMPONENTS
     Core
     Gui
@@ -35,12 +35,20 @@ find_package(Qt6
 # ================================================================
 add_executable(${PROJECT_NAME} WIN32)
 
-target_precompile_headers(${PROJECT_NAME} PRIVATE src/common.h)
+target_precompile_headers(${PROJECT_NAME} PRIVATE src/common.hpp)
+
+target_include_directories(${PROJECT_NAME} PRIVATE include)
 
 target_sources(${PROJECT_NAME}
   PRIVATE
-    src/common.h
+    src/common.hpp
     src/common.cpp
+
+    src/VideoCache.hpp
+    src/VideoCache.cpp
+
+    src/VideoPlayer.hpp
+    src/VideoPlayer.cpp
 
     src/main.cpp
 )
@@ -59,5 +67,18 @@ target_link_libraries(${PROJECT_NAME}
 # ================================================================
 # Third Party
 # ================================================================
+# OpenSSL
+find_package(OpenSSL REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE OpenSSL::SSL OpenSSL::Crypto)
+
+# KtUtils
 add_subdirectory(third_party/KtUtils)
 target_link_libraries(${PROJECT_NAME} PRIVATE KtUtils)
+
+# vlc-qt
+include(third_party/vlc-qt/vlc-qt.cmake)
+target_link_libraries(${PROJECT_NAME}
+  PRIVATE
+    VLCQt::Core
+    VLCQt::Widgets
+)

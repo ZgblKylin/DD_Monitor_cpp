@@ -31,7 +31,7 @@ jobs:
         uses: jurplel/install-qt-action@v2.12.1
         with:
           # Version of Qt to install
-          version: 6.0.0 # optional, default is 5.15.2
+          version: 5.15.2 # optional, default is 5.15.2
           # Whether or not to actually download Qt
           cached: ${{ steps.cache-qt.outputs.cache-hit }} # optional, default is false
 

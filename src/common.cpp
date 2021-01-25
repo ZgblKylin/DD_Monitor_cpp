@@ -1,5 +1,4 @@
-﻿
-QSettings Settings() {
+﻿QSettings Settings() {
   static const QSettings::Format format = QSettings::registerFormat(
       QStringLiteral("json"), &KtUtils::SettingsExtra::jsonReadFunc,
       &KtUtils::SettingsExtra::jsonWriteFunc, Qt::CaseInsensitive);
